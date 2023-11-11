@@ -1,0 +1,29 @@
+.screenContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    > .scaledScreen {
+        // We want our screen to be 256x240 etc. not including padding and stuff
+        box-sizing: content-box;
+        // outline-width: 2px;
+
+        // FIXME: THIS MAY NOT WORK RIGHT IN THE NESTED CONTEXT
+        &:focus {
+            // outline-width: 2px;
+
+            // for some reason focusing the element doesn't give it the normal
+            // white outline, but after we focus and click a key
+            // it turns white?
+            // I can't find where index.scss does this, so maybe it's a browser behavior?
+            border-width: 2px;
+            border-style: solid;
+            border-color: white;
+        }
+    }
+}

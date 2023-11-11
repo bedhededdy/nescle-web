@@ -1,0 +1,57 @@
+// FIXME: THERE ARE SOME ODDITIES HERE, BUT IT DOES DISPLAY CORRECTLY (MOSTLY)
+//        USE BROWSER DEV CONSOLE TO INVESTIGATE
+nav {
+    display: flex;
+
+    // align-items: center;
+    // justify-content: center;
+    justify-content: space-between;
+
+    border-width: 0px;
+    border-bottom: 0.5rem;
+    border-style: solid;
+    border-color: white;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+// The buttons appear on the right of the div
+.leftButtonsContainer {
+    text-align: right;
+    width: 33%;
+
+    > button {
+        // FIXME: THE LAST BUTTON SHOULD NOT HAVE THIS MARGIN
+        margin-right: 1rem;
+    }
+}
+
+// The buttons appear on the left of the div
+.rightButtonsContainer {
+    text-align: left;
+    width: 33%;
+
+    > button {
+        margin-right: 1rem;
+    }
+}
+
+.middleSpaceContainer {
+    width: 34%;
+    text-align: center;
+
+
+    // FIXME: TAKE H1 OUT OF THE NAV, IT IS SEMANTICALLY INCORRECT
+    // FIXME: THIS IS NOT INLINE WITH THE BUTTONS BECAUSE THEY HAVE PADDING
+    // FOR THEIR TEXT WHEREAS THE HEADER DOESN'T
+    .headerContainer {
+        padding-top: 0.6em;
+        padding-bottom: 0.6em;
+
+        > h1 {
+            margin: 0px;
+            font-size: 20pt;
+        }
+    }
+}
