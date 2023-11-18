@@ -13,6 +13,8 @@ const NavBar: React.FC<INavBarProps> = (props) => {
     const aboutRef = useRef<HTMLAnchorElement>(null);
     const chooseFileRef = useRef<HTMLInputElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
+    const saveRef = useRef<HTMLButtonElement>(null);
+    const loadRef = useRef<HTMLButtonElement>(null);
 
     // FIXME: PROPERLY TYPE E
     const chooseFileCallback = useCallback((e: any) => {
@@ -73,14 +75,41 @@ const NavBar: React.FC<INavBarProps> = (props) => {
     const aboutCallback = useCallback(() => {
     }, [aboutRef.current]);
 
+    const saveCallback = useCallback(() => {
+        console.log("requesting save");
+        fetch(window.apiUrl + "/api/save-state", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "uid": "1234",
+                "game": "smb"
+            })
+        }).then((res) => { console.log("return from save") });
+    }, [saveRef.current]);
+
+    const loadCallback = useCallback(() => {
+        console.log("requesting load");
+        fetch(window.apiUrl + "/api/load-state?uid=1234&game=smb", {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+        }).then((res) => { console.log("return from load") });
+    }, [loadRef.current]);
 
     return (
         <>
             <nav>
                 <div className="leftButtonsContainer">
                     <button onClick={loadRomCallback}>Load ROM</button>
-                    {/* <button>Save</button> */}
-                    {/* <button>Load</button> */}
+                    <button onClick={saveCallback} ref={saveRef}>Save</button>
+                    <button onClick={loadCallback} ref={loadRef}>Load</button>
                     <button onClick={resetCallback}>Reset</button>
                     <button onClick={playPauseCallback}>Play/Pause</button>
                 </div>

@@ -10,4 +10,6 @@ interface Window {
     lastRenderTime: number;
     frameDelta: number;
     frameQueue: [Uint8Array];
+    authToken: string;
+    apiUrl: string;
 }

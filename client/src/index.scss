@@ -63,6 +63,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input {
+  display: block;
+  margin-bottom: 1rem;
+  height: 2rem;
+  border-radius: 2px;
+
+  &:hover {
+      border-color: #646cff;
+  }
+}
+
 // @media (prefers-color-scheme: light) {
 //   :root {
 //     color: #213547;
