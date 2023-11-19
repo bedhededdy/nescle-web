@@ -1,9 +1,13 @@
-import React, { useRef, useCallback } from "react";
+
+import React, { useRef, useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./styles/Login.scss";
 
 const Login: React.FC = () => {
+    // TODO: ADD EMAIL VALIDATION
+    const [loginEnabled, setLoginEnabled] = useState(false);
+
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const loginRef = useRef<HTMLButtonElement>(null);
@@ -29,14 +33,21 @@ const Login: React.FC = () => {
         })
     }, [emailRef.current, passwordRef.current]);
 
+    const inputFieldOnChange = useCallback(() => {
+        if (emailRef.current!.value && passwordRef.current!.value)
+            setLoginEnabled(true);
+        else
+            setLoginEnabled(false);
+    }, []);
+
     return (
         <div className="loginContainer">
             <div className="loginChild">
                 <h2>Login</h2>
                 <div>
-                    <input ref={emailRef} type="text" placeholder="Email" />
-                    <input ref={passwordRef} type="password" placeholder="Password" />
-                    <button ref={loginRef} onClick={loginCallback} >Login</button>
+                    <input ref={emailRef} onChange={inputFieldOnChange} type="text" placeholder="Email" />
+                    <input ref={passwordRef} onChange={inputFieldOnChange} type="password" placeholder="Password" />
+                    <button ref={loginRef} disabled={!loginEnabled} onClick={loginCallback} >Login</button>
                 </div>
                 <div>
                     <Link to="/emu">Skip Login</Link>

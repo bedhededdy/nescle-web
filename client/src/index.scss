@@ -58,6 +58,8 @@ button {
 button:hover {
   border-color: #646cff;
 }
+
+// FIXME: THIS MAY BE CAUSING THE WEIRD ENTRY FIELD STYLING
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -72,6 +74,18 @@ input {
   &:hover {
       border-color: #646cff;
   }
+}
+
+.errInput {
+  border: 1px solid red;
+}
+
+.errText {
+  color: red;
+}
+
+.succText {
+  color: green;
 }
 
 // @media (prefers-color-scheme: light) {

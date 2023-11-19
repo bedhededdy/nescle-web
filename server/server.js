@@ -68,6 +68,11 @@ app.post("/api/register", async (req, res) => {
         return;
     }
 
+    if (!validateEmail(email)) {
+        res.status(httpStatus.BAD_REQUEST).send("Invalid email");
+        return;
+    }
+
     // FIXME: COULD CRASH
     const [emailQueryResult] = await connection.execute("select email from user where email = ?", [email]);
 
@@ -95,6 +100,11 @@ app.post("/api/login", async (req, res) => {
 
     if (!email || !password) {
         res.status(httpStatus.BAD_REQUEST).send("Missing username or password");
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        res.status(httpStatus.BAD_REQUEST).send("Invalid email");
         return;
     }
 
@@ -136,6 +146,14 @@ app.get("/api/load-settings", (req, res) => {
 
 });
 
+app.post("/api/forgot-password", (req, res) => {
+
+});
+
+app.post("/api/reset-password", (req, res) => {
+
+});
+
 // Catch all route to avoid breaking on refresh
 // Any state on the client will not be preserved unless we either
 // send it to the server on refresh or store it on the client
@@ -150,6 +168,10 @@ function authenticateToken(token) {
         return false;
     }
     return true;
+}
+
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 app.listen(port, () => {
