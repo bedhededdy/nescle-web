@@ -14,14 +14,14 @@ export default class Speakers {
     constructor() {
         // Stores 2 onaudioprocess calls worth of samples (at 48khz this means we will be about 1/6 of a
         // second out of sync with the video)
-        this._buffer = new RingBuffer<number>(8192);
+        this._buffer = new RingBuffer<number>(4096);
     }
 
     public start(): void {
         this._audioContext = new window.AudioContext();
         // FIXME: NEEDS TO BE 1024 OR 512 FOR ACCURACCY THIS IS JUST FOR OVERKILL
         // FIXME: WE ARE CONSTANTLY UNDERRUNNING THIS BUFFER AT 1024
-        this._scriptNode = this._audioContext.createScriptProcessor(4096, 0, 1);
+        this._scriptNode = this._audioContext.createScriptProcessor(2048, 0, 1);
         this._scriptNode.onaudioprocess = this.onAudioProcess.bind(this);
         this._scriptNode.connect(this._audioContext.destination);
 
